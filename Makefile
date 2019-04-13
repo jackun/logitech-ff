@@ -24,8 +24,18 @@ unload:
 	modprobe usbhid
 	modprobe ff-memless
 
+load_with_builtin_hid:
+	-rmmod hid-logitech-hidpp hid-logitech hid-logitech-dj klgd-ff-plugin klgd usbhid hid-generic
+	modprobe hid-generic
+	modprobe usbhid
+	modprobe ff-memless
+	insmod KLGD/klgd.ko
+	insmod KLGDFF/plugin/klgd_ff_plugin.ko
+	-rmmod hid-logitech
+	insmod hid-logitech/hid-logitech.ko
+
 load_g29:
-	-rmmod hid-logitech-hidpp hid-logitech klgd-ff-plugin klgd usbhid hid-generic hid
+	-rmmod hid-logitech-hidpp hid-logitech hid-logitech-dj klgd-ff-plugin klgd usbhid hid-generic hid
 	insmod hid/hid.ko
 	modprobe hid-generic
 	modprobe usbhid
@@ -36,7 +46,7 @@ load_g29:
 	insmod hid-logitech/hid-logitech.ko
 
 load_g920:
-	-rmmod hid-logitech-hidpp hid-logitech klgd-ff-plugin klgd usbhid hid-generic hid
+	-rmmod hid-logitech-hidpp hid-logitech hid-logitech-dj klgd-ff-plugin klgd usbhid hid-generic hid
 	insmod hid/hid.ko
 	modprobe hid-generic
 	modprobe usbhid
